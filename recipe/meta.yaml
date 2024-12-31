@@ -7,11 +7,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 9bededcc256155ad52194c78a4fb9d9d8e93adc728e7bbdea0ab1eae7f590ebd
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
@@ -20,12 +20,12 @@ build:
 requirements:
   host:
     - pip
-    - python >=3
+    - python {{ python_min }}
   run:
     - click
     - commonmark
     - pygments
-    - python >=3
+    - python >={{ python_min }}
     - setproctitle
 
 test:
@@ -35,6 +35,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/kneufeld/consolemd
